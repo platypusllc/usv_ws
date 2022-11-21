@@ -1,0 +1,12 @@
+[submodule "src/autonomy_sim_bringup"]
+	path = src/autonomy_sim_bringup
+	url = git@github.com:platypusllc/autonomy_sim_bringup.git
+[submodule "src/simusv"]
+	path = src/simusv
+	url = git@github.com:platypusllc/simusv.git
+[submodule "src/autonomy"]
+	path = src/autonomy
+	url = git@github.com:platypusllc/autonomy.git
+[submodule "src/autonomy_interfaces"]
+	path = src/autonomy_interfaces
+	url = git@github.com:platypusllc/autonomy_interfaces.git
