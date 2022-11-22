@@ -9,21 +9,25 @@ Note, for details about git submodules see https://git-scm.com/book/en/v2/Git-To
 ```
 This will both clone the usv_ws repo and also init and update the submodule directories in usv_ws/src.
 
-```~$ cd usv_ws/src/simusv
+```
+~$ cd usv_ws/src/simusv
 ~/usv_ws/src/simusv$ git checkout main
 ~/usv_ws/src/simusv$ cd ../..
 ~/usv_ws$ 
 ```
+
 Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a module for any submodule repo that you plan to make changes on.
 
-```~/usv_ws$ docker build -t usv .
+```
+~/usv_ws$ docker build -t usv .
 ```
 This will build the docker image.
 
 Subsequent invocations of "docker build" will use the already existing
 images, so there'll be a lot less output when you run it.
 
-```~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
+```
+~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 ```
 This will:
@@ -38,9 +42,10 @@ However, going in the opposite direction doesn't work as well.  In
 particular, attempting to use the git repo from within the docker
 image will not work with a warning about:
 
-"fatal: detected dubious ownership in repository [...etc...]"
+> fatal: detected dubious ownership in repository [...etc...]
 
-```root@f1f4a30bbad3:/ws# colcon build
+```
+root@f1f4a30bbad3:/ws# colcon build
 Starting >>> autonomy_interfaces
 Starting >>> simusv
 --- stderr: simusv                                                                  
@@ -62,12 +67,16 @@ Summary: 4 packages finished [10.1s]
   2 packages had stderr output: autonomy simusv
 root@52414428f42f:/ws#
 ```
+
 This will build the docker instance.
 
-```root@52414428f42f:/ws# source install/setup.bash 
+```
+root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws#
 ```
-```root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
+
+```
+root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 ```
 This starts the sim and autonomy.
 
@@ -79,7 +88,8 @@ for testing purposes. Obviously we should change this soon.
 For illustrative purposes, here's a full log of going through the
 process on an Ubuntu install.
 
-```puff@rockyraccoon:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
+```
+puff@rockyraccoon:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
 Cloning into 'usv_ws'...
 remote: Enumerating objects: 13, done.
 remote: Counting objects: 100% (13/13), done.
