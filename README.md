@@ -36,6 +36,8 @@ subsequent invocations of "docker build" will use the already existing
 images. There'll be a lot less output if you run "docker build" a
 second time, even if you're doing it with a fresh git clone.
 
+Note: If you're editing the code, you'll need to re-run "docker build" to run the changed code.
+
 
 ```
 ~/usv_ws$ docker build -t usv .
@@ -51,6 +53,8 @@ The "docker run" command below will:
 - log you into the root shell on the docker container instance
 
 Any changes you edit in the usv_ws repo on your laptop will be visible in /ws.  You can edit files on your local machine and then run them from inside the docker container instance.
+
+Note: See the note in the "docker build" step, above, about running changed code.
 
 However, going in the opposite direction doesn't work as well.  In
 particular, attempting to use the git commands on a repo from within
