@@ -1,0 +1,13 @@
+# Copy this file to usv_ws/.gitignore
+build
+install
+log
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+gitignore_template
