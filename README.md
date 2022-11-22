@@ -7,7 +7,9 @@ Note, for details about git submodules see https://git-scm.com/book/en/v2/Git-To
 ```
 ~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
 ```
+
 This will both clone the usv_ws repo and also init and update the submodule directories in usv_ws/src.
+Without the --recurse-submodueles argument, the subdirectories under usv_ws/src/ would remain empty.
 
 ```
 ~$ cd usv_ws/src/simusv
