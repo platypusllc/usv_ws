@@ -32,11 +32,12 @@ images, so there'll be a lot less output when you run it.
 ~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 ```
+
 This will:
-a) run the docker image
-b) mount the current working directory on your laptop,
-c) as /ws in the docker container instance
-e) log you into the root shell on the docker container instance
+1. run the docker image
+2. mount the current working directory on your laptop,
+3. as /ws in the docker container instance
+4. log you into the root shell on the docker container instance
 
 Any changes you edit in the usv_ws repo on your laptop will be visible in /ws.
 
