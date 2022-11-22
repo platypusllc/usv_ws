@@ -101,28 +101,28 @@ Submodule 'src/autonomy' (git@github.com:platypusllc/autonomy.git) registered fo
 Submodule 'src/autonomy_interfaces' (git@github.com:platypusllc/autonomy_interfaces.git) registered for path 'src/autonomy_interfaces'
 Submodule 'src/autonomy_sim_bringup' (git@github.com:platypusllc/autonomy_sim_bringup.git) registered for path 'src/autonomy_sim_bringup'
 Submodule 'src/simusv' (git@github.com:platypusllc/simusv.git) registered for path 'src/simusv'
-Cloning into '/home/puff/usv_ws/src/autonomy'...
+Cloning into '/home/foo/usv_ws/src/autonomy'...
 remote: Enumerating objects: 27, done.        
 remote: Counting objects: 100% (27/27), done.        
 remote: Compressing objects: 100% (18/18), done.        
 remote: Total 27 (delta 9), reused 25 (delta 7), pack-reused 0        
 Receiving objects: 100% (27/27), 7.59 KiB | 3.79 MiB/s, done.
 Resolving deltas: 100% (9/9), done.
-Cloning into '/home/puff/usv_ws/src/autonomy_interfaces'...
+Cloning into '/home/foo/usv_ws/src/autonomy_interfaces'...
 remote: Enumerating objects: 14, done.        
 remote: Counting objects: 100% (14/14), done.        
 remote: Compressing objects: 100% (12/12), done.        
 remote: Total 14 (delta 2), reused 14 (delta 2), pack-reused 0        
 Receiving objects: 100% (14/14), done.
 Resolving deltas: 100% (2/2), done.
-Cloning into '/home/puff/usv_ws/src/autonomy_sim_bringup'...
+Cloning into '/home/foo/usv_ws/src/autonomy_sim_bringup'...
 remote: Enumerating objects: 15, done.        
 remote: Counting objects: 100% (15/15), done.        
 remote: Compressing objects: 100% (11/11), done.        
 remote: Total 15 (delta 4), reused 14 (delta 3), pack-reused 0        
 Receiving objects: 100% (15/15), done.
 Resolving deltas: 100% (4/4), done.
-Cloning into '/home/puff/usv_ws/src/simusv'...
+Cloning into '/home/foo/usv_ws/src/simusv'...
 remote: Enumerating objects: 279, done.        
 remote: Counting objects: 100% (279/279), done.        
 remote: Compressing objects: 100% (179/179), done.        
