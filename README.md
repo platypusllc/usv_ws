@@ -89,7 +89,7 @@ For illustrative purposes, here's a full log of going through the
 process on an Ubuntu install.
 
 ```
-puff@rockyraccoon:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
+foo@bar:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
 Cloning into 'usv_ws'...
 remote: Enumerating objects: 13, done.
 remote: Counting objects: 100% (13/13), done.
@@ -133,25 +133,25 @@ Submodule path 'src/autonomy': checked out '98edf7ae99af97f05d4bf4fd7c11cfe8a583
 Submodule path 'src/autonomy_interfaces': checked out '90980c72097c3c14fc141f12bdf8ea710a831788'
 Submodule path 'src/autonomy_sim_bringup': checked out '2de9bb34c1fffa434be86065933dfe223b4c3048'
 Submodule path 'src/simusv': checked out 'eff5bc5d0e640cef78c7e4407db148cf532dd81e'
-puff@rockyraccoon:~$ cd usv_ws/
-puff@rockyraccoon:~/usv_ws$ cd src/simusv/
-puff@rockyraccoon:~/usv_ws/src/simusv$ git branch -a
+foo@bar:~$ cd usv_ws/
+foo@bar:~/usv_ws$ cd src/simusv/
+foo@bar:~/usv_ws/src/simusv$ git branch -a
 * (HEAD detached at eff5bc5)
   main
   remotes/origin/HEAD -> origin/main
   remotes/origin/main
-puff@rockyraccoon:~/usv_ws/src/simusv$ git checkout main
+foo@bar:~/usv_ws/src/simusv$ git checkout main
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
-puff@rockyraccoon:~/usv_ws/src/simusv$ cd ..
-puff@rockyraccoon:~/usv_ws/src$ cd ..
-puff@rockyraccoon:~/usv_ws$ git branch -a
+foo@bar:~/usv_ws/src/simusv$ cd ..
+foo@bar:~/usv_ws/src$ cd ..
+foo@bar:~/usv_ws$ git branch -a
 * master
   remotes/origin/HEAD -> origin/master
   remotes/origin/master
-puff@rockyraccoon:~/usv_ws$ cd
-puff@rockyraccoon:~$ cd usv_ws
-puff@rockyraccoon:~/usv_ws$ docker build -t usv .
+foo@bar:~/usv_ws$ cd
+foo@bar:~$ cd usv_ws
+foo@bar:~/usv_ws$ docker build -t usv .
 Sending build context to Docker daemon  476.7kB
 Step 1/6 : FROM ros:humble
  ---> c144c1e970a3
@@ -408,7 +408,7 @@ Removing intermediate container b34b6eb24706
  ---> f80a62ac9d11
 Successfully built f80a62ac9d11
 Successfully tagged usv:latest
-puff@rockyraccoon:~/usv_ws$
+foo@bar:~/usv_ws$
 root@52414428f42f:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# 
