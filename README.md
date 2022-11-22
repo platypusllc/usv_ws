@@ -1,6 +1,8 @@
+# usv_ws Supermodule Instructions
+
 Note, for details about git submodules see https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
-# Steps To Clone, Build and Run ROS Node
+## Steps To Clone, Build and Run ROS Node
 
 ```
 ~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
@@ -72,7 +74,7 @@ This starts the sim and autonomy.
 Note, currently the sim runs for 100 loops and then exits.  That was
 for testing purposes. Obviously we should change this soon.
 
-# Log of cloning, building and running.
+## Log of cloning, building and running.
 
 For illustrative purposes, here's a full log of going through the
 process on an Ubuntu install.
