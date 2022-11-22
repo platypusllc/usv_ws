@@ -1,15 +1,26 @@
 # usv_ws Supermodule Instructions
 
-Note, for details about git submodules see https://git-scm.com/book/en/v2/Git-Tools-Submodules
+usv_ws is a git repo that includes sevearl other (4 so far) repos as git submodules. 
 
-## Steps To Clone, Build and Run ROS Node
+For details about git submodules see https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+## Steps To Clone, Build and Run the usv_ws ROS Node
+
+1. Git clone the usv_ws repo.
+
+The --recurse-submodules paramter will also init and update the submodule directories under usv_ws/src
+
+Without the --recurse-submodueles argument, the subdirectories under usv_ws/src/ would remain empty.
 
 ```
 ~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
 ```
 
-This will both clone the usv_ws repo and also init and update the submodule directories in usv_ws/src.
-Without the --recurse-submodueles argument, the subdirectories under usv_ws/src/ would remain empty.
+2. Check out a branch in any submodule that you want to make changs to.
+
+Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a module for any submodule repo that you plan to make changes on.
+
+For example, if you're planning on editing files in the simusv repo submodule:
 
 ```
 ~$ cd usv_ws/src/simusv
@@ -18,34 +29,41 @@ Without the --recurse-submodueles argument, the subdirectories under usv_ws/src/
 ~/usv_ws$ 
 ```
 
-Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a module for any submodule repo that you plan to make changes on.
+3. Build the docker image with "docker build":
+
+Note: Docker saves images elsewhere, outside of the git repo, so
+subsequent invocations of "docker build" will use the already existing
+images. There'll be a lot less output if you run "docker build" a
+second time, even if you're doing it with a fresh git clone.
+
 
 ```
 ~/usv_ws$ docker build -t usv .
 ```
-This will build the docker image.
 
-Subsequent invocations of "docker build" will use the already existing
-images, so there'll be a lot less output when you run it.
+4. Run the docker image.
+
+The "docker run" command below will:
+
+- run the docker image
+- mount the current working directory on your laptop as a volume inside docker
+- under /ws in the docker container instance
+- log you into the root shell on the docker container instance
+
+Any changes you edit in the usv_ws repo on your laptop will be visible in /ws.  You can edit files on your local machine and then run them from inside the docker container instance.
+
+However, going in the opposite direction doesn't work as well.  In
+particular, attempting to use the git commands on a repo from within
+the docker image will not work, and you'll see a warning about:
+
+> fatal: detected dubious ownership in repository [...etc...]
 
 ```
 ~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 ```
 
-This will:
-1. run the docker image
-2. mount the current working directory on your laptop,
-3. as /ws in the docker container instance
-4. log you into the root shell on the docker container instance
-
-Any changes you edit in the usv_ws repo on your laptop will be visible in /ws.
-
-However, going in the opposite direction doesn't work as well.  In
-particular, attempting to use the git repo from within the docker
-image will not work with a warning about:
-
-> fatal: detected dubious ownership in repository [...etc...]
+5. Build the ROS node inside the docker image:
 
 ```
 root@f1f4a30bbad3:/ws# colcon build
@@ -71,25 +89,27 @@ Summary: 4 packages finished [10.1s]
 root@52414428f42f:/ws#
 ```
 
-This will build the docker instance.
+6. Source the install/setup.bash file.
 
 ```
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws#
 ```
 
-```
-root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
-```
-This starts the sim and autonomy.
+7. Launch the ROS nodes.
+
 
 Note, currently the sim runs for 100 loops and then exits.  That was
 for testing purposes. Obviously we should change this soon.
 
-## Log of cloning, building and running.
+```
+root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
+```
+
+## Log of Cloning, Running, Building and Launching
 
 For illustrative purposes, here's a full log of going through the
-process on an Ubuntu install.
+process, on an Ubuntu 20.04 LTS install.
 
 ```
 foo@bar:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
