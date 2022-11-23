@@ -16,6 +16,8 @@ Without the --recurse-submodueles argument, the subdirectories under usv_ws/src/
 ~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
 ```
 
+If you are new to GitHub, you may need to setup your ssh-key since this is a private repo, follow the instructions here: https://kbroman.org/github_tutorial/pages/first_time.html
+
 2. Check out a branch in any submodule that you want to make changs to.
 
 Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a module for any submodule repo that you plan to make changes on.
