@@ -28,6 +28,8 @@ Without the --recurse-submodules argument, the subdirectories under usv_ws/src/ 
 ~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
 ```
 
+If you are new to GitHub, you may need to setup your ssh-key since this is a private repo, follow the instructions here: https://kbroman.org/github_tutorial/pages/first_time.html
+
 2. Check out a branch in any submodule that you want to make changes to.
 
 Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a branch for any submodule repo that you plan to make changes on.
@@ -69,6 +71,8 @@ from inside the docker container instance.  Note: See the note about
 However, going in the opposite direction doesn't work as well.  In
 particular, attempting to use the git commands on a repo from within
 the docker image will not work, and you'll see a warning about:
+
+
 
 > fatal: detected dubious ownership in repository [...etc...]
 
