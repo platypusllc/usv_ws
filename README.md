@@ -1,24 +1,36 @@
 # usv_ws Supermodule Instructions
 
-usv_ws is a git repo that includes sevearl other (4 so far) repos as git submodules. 
+usv_ws is a git repo that includes several other (4 so far) repos as git submodules. 
 
 For details about git submodules see https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+## Summary:
+
+```
+foo@bar:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
+foo@bar:~$ cd usv_ws/
+foo@bar:~/usv_ws$ docker build -t usv .
+~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
+root@f1f4a30bbad3:/ws# 
+root@52414428f42f:/ws# source install/setup.bash 
+root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
+```
 
 ## Steps To Clone, Build and Run the usv_ws ROS Node
 
 1. Git clone the usv_ws repo.
 
-The --recurse-submodules paramter will also init and update the submodule directories under usv_ws/src
+The --recurse-submodules parameter will also init and update the submodule directories under usv_ws/src
 
-Without the --recurse-submodueles argument, the subdirectories under usv_ws/src/ would remain empty.
+Without the --recurse-submodules argument, the subdirectories under usv_ws/src/ will remain empty.
 
 ```
 ~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
 ```
 
-2. Check out a branch in any submodule that you want to make changs to.
+2. Check out a branch in any submodule that you want to make changes to.
 
-Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a module for any submodule repo that you plan to make changes on.
+Submodules are **always** cloned with a detached head. This shouldn't matter for running the submodule, but if you make any changes to the code without first doing "git checkout branchname" then you have to sort out the detached head.  So for now, just go in and checkout to a branch for any submodule repo that you plan to make changes on.
 
 For example, if you're planning on editing files in the simusv repo submodule:
 
@@ -36,9 +48,6 @@ subsequent invocations of "docker build" will use the already existing
 images. There'll be a lot less output if you run "docker build" a
 second time, even if you're doing it with a fresh git clone.
 
-Note: If you're editing the code, you'll need to re-run "docker build" to run the changed code.
-
-
 ```
 ~/usv_ws$ docker build -t usv .
 ```
@@ -52,9 +61,10 @@ The "docker run" command below will:
 - under /ws in the docker container instance
 - log you into the root shell on the docker container instance
 
-Any changes you edit in the usv_ws repo on your laptop will be visible in /ws.  You can edit files on your local machine and then run them from inside the docker container instance.
-
-Note: See the note in the "docker build" step, above, about running changed code.
+Any changes you edit in the usv_ws repo on your laptop will be visible
+in /ws.  You can edit files on your local machine and then run them
+from inside the docker container instance.  Note: See the note about
+"colcon build", below, about running changed code.
 
 However, going in the opposite direction doesn't work as well.  In
 particular, attempting to use the git commands on a repo from within
@@ -62,12 +72,18 @@ the docker image will not work, and you'll see a warning about:
 
 > fatal: detected dubious ownership in repository [...etc...]
 
+To run the docker image:
+
 ```
 ~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 ```
 
+Note: While docker container instances are persistent, "docker run" starts a new instance each time.  To start previous a container instance you can use "docker start" but general practice in the docker world is to start a new container instance every time.  You should use tools (starting with a Dockerfile) to script any necessary changes, rather than relying on manually making changes inside a running container instance.
+
 5. Build the ROS node inside the docker image:
+
+Note: If you edit the code, you'll need to re-run "colcon build" before restarting the ROS node, to run the changed code.
 
 ```
 root@f1f4a30bbad3:/ws# colcon build
@@ -93,7 +109,7 @@ Summary: 4 packages finished [10.1s]
 root@52414428f42f:/ws#
 ```
 
-6. Source the install/setup.bash file.
+6. Source the install/setup.bash file to set up environment variables.
 
 ```
 root@52414428f42f:/ws# source install/setup.bash 
@@ -101,7 +117,6 @@ root@52414428f42f:/ws#
 ```
 
 7. Launch the ROS nodes.
-
 
 Note, currently the sim runs for 100 loops and then exits.  That was
 for testing purposes. Obviously we should change this soon.
@@ -436,7 +451,8 @@ Removing intermediate container b34b6eb24706
 Successfully built f80a62ac9d11
 Successfully tagged usv:latest
 foo@bar:~/usv_ws$
-root@52414428f42f:/ws# 
+~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
+root@f1f4a30bbad3:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# 
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
