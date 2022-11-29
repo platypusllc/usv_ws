@@ -10,7 +10,7 @@ For details about git submodules see https://git-scm.com/book/en/v2/Git-Tools-Su
 foo@bar:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
 foo@bar:~$ cd usv_ws/
 foo@bar:~/usv_ws$ docker build -t usv .
-~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
+foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
@@ -25,7 +25,7 @@ The --recurse-submodules parameter will also init and update the submodule direc
 Without the --recurse-submodules argument, the subdirectories under usv_ws/src/ will remain empty.
 
 ```
-~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
+foo@bar:~$ git clone --recurse-submodules https://github.com/platypusllc/usv_ws/
 ```
 
 If you are new to GitHub, you may need to setup your ssh-key since this is a private repo, follow the instructions here: https://kbroman.org/github_tutorial/pages/first_time.html
@@ -37,10 +37,10 @@ Submodules are **always** cloned with a detached head. This shouldn't matter for
 For example, if you're planning on editing files in the simusv repo submodule:
 
 ```
-~$ cd usv_ws/src/simusv
-~/usv_ws/src/simusv$ git checkout main
-~/usv_ws/src/simusv$ cd ../..
-~/usv_ws$ 
+foo@bar:~$ cd usv_ws/src/simusv
+foo@bar:~/usv_ws/src/simusv$ git checkout main
+foo@bar:~/usv_ws/src/simusv$ cd ../..
+foo@bar:~/usv_ws$ 
 ```
 
 3. Build the docker image with "docker build":
@@ -51,7 +51,7 @@ images. There'll be a lot less output if you run "docker build" a
 second time, even if you're doing it with a fresh git clone.
 
 ```
-~/usv_ws$ docker build -t usv .
+foo@bar:~/usv_ws$ docker build -t usv .
 ```
 
 4. Run the docker image.
@@ -79,7 +79,7 @@ the docker image will not work, and you'll see a warning about:
 To run the docker image:
 
 ```
-~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
+foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 ```
 
@@ -455,7 +455,7 @@ Removing intermediate container b34b6eb24706
 Successfully built f80a62ac9d11
 Successfully tagged usv:latest
 foo@bar:~/usv_ws$
-~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
+foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# 
