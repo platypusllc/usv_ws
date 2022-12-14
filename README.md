@@ -13,8 +13,10 @@ foo@bar:~/usv_ws$ docker build -t usv .
 foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@f1f4a30bbad3:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
+root@f1f4a30bbad3:/ws# colcon build
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 ```
+Note: 
 
 ## Steps To Clone, Build and Run the usv_ws ROS Node
 
@@ -87,7 +89,9 @@ Note: While docker container instances are persistent, "docker run" starts a new
 
 5. Build the ROS node inside the docker image:
 
-Note: If you edit the code, you'll need to re-run "colcon build" before restarting the ROS node, to run the changed code.
+The "target=/ws" parameter should have started you inside /ws in the docker container instance. If you're not in /ws, cd into /ws.
+
+Note: Also, if you edit the code, you'll need to re-run "colcon build" before restarting the ROS node, to run the changed code.
 
 ```
 root@f1f4a30bbad3:/ws# colcon build
