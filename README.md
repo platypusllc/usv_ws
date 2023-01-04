@@ -11,9 +11,9 @@ foo@bar:~$ git clone --recurse-submodules git@github.com:platypusllc/usv_ws/
 foo@bar:~$ cd usv_ws/
 foo@bar:~/usv_ws$ docker build -t usv .
 foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
-root@f1f4a30bbad3:/ws# 
+root@52414428f42f:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
-root@f1f4a30bbad3:/ws# colcon build
+root@52414428f42f:/ws# colcon build
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 ```
 Note: 
@@ -82,19 +82,26 @@ To run the docker image:
 
 ```
 foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
-root@f1f4a30bbad3:/ws# 
+root@52414428f42f:/ws# 
 ```
 
 Note: While docker container instances are persistent, "docker run" starts a new instance each time.  To start previous a container instance you can use "docker start" but general practice in the docker world is to start a new container instance every time.  You should use tools (starting with a Dockerfile) to script any necessary changes, rather than relying on manually making changes inside a running container instance.
 
-5. Build the ROS node inside the docker image:
+5. Source the install/setup.bash file to set up environment variables.
+
+```
+root@52414428f42f:/ws# source install/setup.bash 
+root@52414428f42f:/ws#
+```
+
+6. Build the ROS node inside the docker image:
 
 The "target=/ws" parameter should have started you inside /ws in the docker container instance. If you're not in /ws, cd into /ws.
 
 Note: Also, if you edit the code, you'll need to re-run "colcon build" before restarting the ROS node, to run the changed code.
 
 ```
-root@f1f4a30bbad3:/ws# colcon build
+root@52414428f42f:/ws# colcon build
 Starting >>> autonomy_interfaces
 Starting >>> simusv
 --- stderr: simusv                                                                  
@@ -114,13 +121,6 @@ Finished <<< autonomy_sim_bringup [0.95s]
 
 Summary: 4 packages finished [10.1s]
   2 packages had stderr output: autonomy simusv
-root@52414428f42f:/ws#
-```
-
-6. Source the install/setup.bash file to set up environment variables.
-
-```
-root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws#
 ```
 
@@ -460,9 +460,30 @@ Successfully built f80a62ac9d11
 Successfully tagged usv:latest
 foo@bar:~/usv_ws$
 foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
-root@f1f4a30bbad3:/ws# 
+root@52414428f42f:/ws# 
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# 
+root@52414428f42f:/ws# colcon build
+Starting >>> autonomy_interfaces
+Starting >>> simusv
+--- stderr: simusv                                                                  
+/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+  warnings.warn(
+---
+Finished <<< simusv [1.20s]
+Finished <<< autonomy_interfaces [7.84s]                     
+Starting >>> autonomy
+--- stderr: autonomy                   
+/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+  warnings.warn(
+---
+Finished <<< autonomy [1.07s]
+Starting >>> autonomy_sim_bringup
+Finished <<< autonomy_sim_bringup [0.95s]                   
+
+Summary: 4 packages finished [10.1s]
+  2 packages had stderr output: autonomy simusv
+root@52414428f42f:/ws#
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 [INFO] [launch]: All log files can be found below /root/.ros/log/2022-11-22-00-45-58-406861-52414428f42f-911
 [INFO] [launch]: Default logging verbosity is set to INFO
