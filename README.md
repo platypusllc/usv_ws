@@ -16,7 +16,22 @@ root@52414428f42f:/ws# colcon build
 root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 ```
-Note: 
+Note:  There are several simple shell scripts in the usv_ws repo that I added to simplify some things.
+
+They were written and used under linux. They should work under Mac OSX. Under Windows, I'm afraid you're on your own.
+
+With a git submodule, if you do "git status" or similar commands, the command does not recurse into the submodules. These scripts cd into each of the four submodules and run the command, so you can quickly and easily see changes over all of the submodules.  Note, they do not at this time run the git command at the top, in usv_ws itself.
+
+- ./git_status.sh
+- ./git_branches.sh
+- ./git_pull.sh
+- ./git_current.sh
+
+Also:
+
+- ./run_docker.sh, runs the docker instance with the paramaters recommended above.
+- ./launch_ros.sh, to be run from inside the docker instance, starts ROS with the parameters recommended above.
+
 
 ## Steps To Clone, Build and Run the usv_ws ROS Node
 
