@@ -12,8 +12,8 @@ foo@bar:~$ cd usv_ws/
 foo@bar:~/usv_ws$ docker build -t usv .
 foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@52414428f42f:/ws# 
-root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# colcon build
+root@52414428f42f:/ws# source install/setup.bash 
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 ```
 Note: 
@@ -461,8 +461,6 @@ Successfully tagged usv:latest
 foo@bar:~/usv_ws$
 foo@bar:~/usv_ws$ docker run -it --mount type=bind,source="$(pwd)",target=/ws usv
 root@52414428f42f:/ws# 
-root@52414428f42f:/ws# source install/setup.bash 
-root@52414428f42f:/ws# 
 root@52414428f42f:/ws# colcon build
 Starting >>> autonomy_interfaces
 Starting >>> simusv
@@ -484,6 +482,8 @@ Finished <<< autonomy_sim_bringup [0.95s]
 Summary: 4 packages finished [10.1s]
   2 packages had stderr output: autonomy simusv
 root@52414428f42f:/ws#
+root@52414428f42f:/ws# source install/setup.bash 
+root@52414428f42f:/ws# 
 root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 [INFO] [launch]: All log files can be found below /root/.ros/log/2022-11-22-00-45-58-406861-52414428f42f-911
 [INFO] [launch]: Default logging verbosity is set to INFO
@@ -594,3 +594,4 @@ root@52414428f42f:/ws# ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
 [boatsim-2] [INFO] [1669078060.426491151] [BoatSim]: BoatSim.sim_loop():  1669078060423 before,  1669078060424 after,  0 lapse
 [boatsim-2] [INFO] [1669078060.429532255] [BoatSim]: Run_limit of 100 reached, exiting.
 ```
+
