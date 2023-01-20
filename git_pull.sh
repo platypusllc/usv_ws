@@ -5,6 +5,10 @@ echo "Pulling for autonomy"
 git pull
 cd ../autonomy_interfaces
 echo "Pulling for autonomy_sim_interfaces"
+git pull
 cd ../autonomy_sim_bringup
 echo "Pulling for autonomy_sim_bringup"
+git pull
+cd ../simusv
+echo "Pulling for simusv"
 git pull
