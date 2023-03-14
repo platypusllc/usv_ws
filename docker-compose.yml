@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  usv_ws:
+    image: usv
+    command:
+          - /bin/bash
+          - -c
+          - |
+            pwd
+            colcon build
+            source install/setup.bash
+            ros2 launch autonomy_sim_bringup autonomy_sim.launch.py
+    volumes:
+      - type: bind
+        source: /Users/redpanda/sandbox/platypus/usv_ws
+        target: /ws
